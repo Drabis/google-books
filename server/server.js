@@ -1,42 +1,55 @@
-require("dotenv").config();
 const express = require("express");
-const routes = require("./routes");
-const app = express();
+const session = require("express-session");
+const mongoose = require("mongoose");
 const path = require("path");
-//set up socket server
-const http = require("http").createServer(app);
-//to initialize a new socket server instance
-const io = require("socket.io")(http);
+const routes = require("./routes");
+const PORT = process.env.PORT || 3001;
+const multer = require("multer");
 
-//db connection
-require("./config/db")();
-
-const PORT = process.env.PORT;
-
-//use express middlewaree
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(routes);
-
-//For heroku deployment - this block of codes will only run in production env
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../client/build/index.html"));
-  });
-}
-
-//server listener on connection
-io.on("connection", (socket) => {
-  console.log("a user connected, socket.id is: ", socket.id);
-
-  socket.emit("your id", socket.id);
-
-  socket.on("save book", (title) => {
-    io.emit("saved book title", title);
-  });
+// session
+var MongoDBStore = require("connect-mongodb-session")(session);
+const store = new MongoDBStore({
+  uri: process.env.MONGODB_URI || "mongodb://localhost/applicationdb",
+  collection: "sessions",
+});
+store.on("error", function (error) {});
+const sessionOptions = {
+  secret: process.env.SESSION_SECRET || "This is a secret",
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  store,
+};
+// mongoose
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/jamanadb", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-http.listen(PORT, () => {
-  console.log(`listening on PORT ${PORT}. http://localhost:${PORT}`);
+// express app
+const app = express();
+app.use(session(sessionOptions));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "client/build")));
+}
+// fetching images with multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, "hello.jpeg");
+  },
+});
+
+const upload = multer({ storage: storage });
+app.post("/api/upload", upload.single("file"), (req, res) => {
+  res.status(200).json("file has been uploaded");
+});
+
+app.use(routes);
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}!`);
 });
