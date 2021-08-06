@@ -6,9 +6,8 @@ import { useGlobalContext } from "../../utils/GlobalContext";
 import { Button, Container, Jumbotron } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-
 function Search() {
-  const [, dispatch] = useGlobalContext();
+  const [dispatch] = useGlobalContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
