@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Container, Col, Row, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 
-function Save() {
+export default function Save() {
   const [savedBooks, setSavedBooks] = useState([]);
 
   useEffect(
@@ -128,4 +128,3 @@ function Save() {
   );
 }
 
-export default Save;

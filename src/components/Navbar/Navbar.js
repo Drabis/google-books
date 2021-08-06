@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 
-function Navbar() {
+export default function Navbar() {
   const [isSearch, setIsSearch] = useState(false);
   const location = useLocation();
 
@@ -42,5 +42,3 @@ function Navbar() {
     </nav>
   );
 }
-
-export default Navbar;

@@ -1,8 +1,10 @@
 import React from "react";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Save } from "./pages/Save";
-import Search from "./pages/Search";
-import { Navbar, Footer, NoMatch } from "components";
+import Save from "./pages/Save/Save";
+import Search from "./pages/Search.js/Search";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import NoMatch from "./components/NoMatch";
 import GlobalProvider from "./utils/GlobalContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, Zoom } from "react-toastify";

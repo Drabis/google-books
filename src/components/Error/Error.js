@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Error() {
+export default function Error() {
   return (
     <div className="text-center m-5 p-5">
       <h1>404... Not Found</h1>;
@@ -12,4 +12,4 @@ function Error() {
   );
 }
 
-export default Error;
+
