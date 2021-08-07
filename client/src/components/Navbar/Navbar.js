@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-
+import "./Navbar.css";
 
 export default function Navbar() {
   const [isSearch, setIsSearch] = useState(false);
@@ -21,7 +21,7 @@ export default function Navbar() {
         <Link to="/">
           <img
             src="assets/book-logo.png"
-            style={{ width: 32, height: 32 }}
+            style={{ width: 100, height: 60 }}
             alt="book-logo"
           />{" "}
         </Link>

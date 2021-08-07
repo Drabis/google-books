@@ -1,5 +1,5 @@
 .jumbotron {
-	background-image: url('../hero.jpg');
+	background-image: url('../../assets/library.jpg');
 	background-position: center;
 	background-size: cover;
 	height: 50vh;
@@ -7,7 +7,7 @@
 
 .Search-title {
 	color: rgb(8, 187, 2);
-	font-weight: 700;
+	font-weight: bolder;
 	letter-spacing: 0.2rem;
 }
 
@@ -16,7 +16,7 @@
 	padding: 7px 18px;
 	display: inline-block;
 	margin: 2rem 1rem;
-	border-radius: 25px;
+	border-radius: 5px;
 	border: none;
 	font-size: small;
 }

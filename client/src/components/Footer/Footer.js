@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Navbar } from "react-bootstrap";
+import { AiFillHome } from "react-icons/ai";
+import { BsBookmarks } from "react-icons/bs";
 
 function Footer() {
   return (
@@ -11,11 +13,15 @@ function Footer() {
         className="Footer justify-content-around"
       >
         <div>
-          <Link to="/" className="pl-2"></Link>{" "}
-          <Link to="/save" className="px-2"></Link>
+          <Link to="/" className="pl-2">
+            <AiFillHome size={22} style={{ fill: "#1c0" }} />{" "}
+          </Link>{" "}
+          <Link to="/save" className="px-2">
+            <BsBookmarks size={20} style={{ fill: "#fb2" }} />
+          </Link>
           <small className="text-muted mx-5 px-5">
             {" "}
-            Copyright &copy; 2021 by Aboulaye{" "}
+            Copyright &copy; 2021 by Aboulaye D.{" "}
           </small>{" "}
         </div>
       </Navbar>
